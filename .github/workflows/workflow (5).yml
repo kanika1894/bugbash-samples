@@ -1,0 +1,98 @@
+on: [push]
+jobs:
+  build-and-deploy:
+    env:
+      REGISTRY_URL:  kapasrijkubacr .azurecr.io
+      SERVICE_NAME: kpjavakubernetes  
+      NAMESPACE: $SERVICE_NAME  
+      IMAGE_NAME: $SERVICE_NAME
+      APP_NAME: $(SERVICE_NAME)_
+      SECRET_NAME: kpjavakubernetesdockerauth
+
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    
+    - uses: azure/docker-login@v1
+      with:
+        login-server: $REGISTRY_URL
+        username: 
+        password: 
+    
+    - name: Build and push image to ACR
+      id: build-image
+      run: |
+        docker build "$GITHUB_WORKSPACE/java/jsf/container/Application" -f  "java/jsf/container/Application/Dockerfile" -t  $REGISTRY_URL/$IMAGE_NAME:${{  }}
+        docker push $REGISTRY_URL/$IMAGE_NAME:${{  }}
+    
+    - uses: azure/k8s-set-context@v1
+      with:
+         kubeconfig: kpjavakubernetes_07ab7
+      id: login
+    
+    - name: Create namespace
+      run: |
+        namespacePresent=`kubectl get namespace | grep $NAMESPACE | wc -l`
+        if [ $namespacePresent -eq 0 ]
+        then
+            echo `kubectl create namespace $NAMESPACE`
+        fi
+
+    - uses: azure/k8s-create-secret@v1
+      with:
+        namespace: $NAMESPACE
+        container-registry-url: $REGISTRY_URL
+        container-registry-username: 
+        container-registry-password: 
+        secret-name: $SECRET_NAME
+       
+    - name: Generate Kubernetes Manifest file
+      id: manifest-creation
+      run: |
+        echo  "apiVersion : apps/v1beta1
+              kind: Deployment
+              metadata:
+                name: "$APP_NAME"
+              spec:
+                replicas: 2
+                template:
+                  metadata:
+                    labels:
+                      app: "$APP_NAME"
+              spec:
+                containers:
+                  - name: "$APP_NAME"
+                    image: "$REGISTRY_URL/$IMAGE_NAME"
+                    ports:
+                    - containerPort: aven:3.5.2-jdk-8
+                  
+                  
+
+                apiVersion: v1
+                kind: Service
+                metadata:
+                    name: "$APP_NAME"
+                    labels:
+                        app: "$APP_NAME"
+                spec:
+                    type: LoadBalancer
+                    ports:
+                    - port: aven:3.5.2-jdk-8
+                      targetPort: http
+                      protocol: TCP
+                      name: http
+                    selector:
+                        app: "$APP_NAME"
+                        
+                 "  > manifest_.yml
+
+
+    - uses: azure/k8s-deploy@v1
+      with:
+        namespace: $NAMESPACE
+        manifests: |
+          .yml }}}
+        images: |
+          $REGISTRY_URL/$IMAGE_NAME:${{  }}
+        imagepullsecrets: |
+          $SECRET_NAME
