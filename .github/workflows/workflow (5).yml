@@ -25,7 +25,7 @@ jobs:
       run: |
         echo $IMAGE_NAME
         echo $DOCKER_CONFIG
-        cat $DOCKER_CONFIG
+        cat $DOCKER_CONFIG/config.json
         docker build "$GITHUB_WORKSPACE/node/plain/container/Application" -f  "node/plain/container/Application/Dockerfile" -t  $REGISTRY_URL/$IMAGE_NAME
         docker push $REGISTRY_URL/$IMAGE_NAME
     
