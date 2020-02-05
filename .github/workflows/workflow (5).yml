@@ -23,7 +23,7 @@ jobs:
       id: build-image
       run: |
         echo $IMAGE_NAME
-        docker build "$GITHUB_WORKSPACE/node/plain/container/Application" -f  "node/plain/container/Application/Dockerfile" 
+        docker build "$GITHUB_WORKSPACE/node/plain/container/Application" -f  "node/plain/container/Application/Dockerfile" -t  $REGISTRY_URL/$IMAGE_NAME
         docker push $REGISTRY_URL/$IMAGE_NAME
     
     - uses: azure/k8s-set-context@v1
