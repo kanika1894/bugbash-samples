@@ -16,8 +16,8 @@ jobs:
     - uses: azure/docker-login@v1
       with:
         login-server: $REGISTRY_URL
-        username: 
-        password: 
+        username: abc
+        password: xyz
     
     - name: Build and push image to ACR
       id: build-image
