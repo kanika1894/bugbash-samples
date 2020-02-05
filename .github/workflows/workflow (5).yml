@@ -16,7 +16,7 @@ jobs:
     
     - uses: azure/docker-login@v1
       with:
-        login-server: kapasrijkubacr.azurecr.io
+        login-server: $(REGISTRY_URL)
         username: 'kapasrijkubacr'
         password: 's+Hpaz1jpJFcwmq647n+IpLepCicg4G3'
     
