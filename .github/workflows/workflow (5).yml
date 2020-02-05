@@ -2,7 +2,7 @@ on: [push]
 jobs:
   build-and-deploy:
     env:
-      REGISTRY_URL:  kapasrijkubacr.azurecr.io
+      REGISTRY_URL: kapasrijkubacr.azurecr.io
       SERVICE_NAME: kpjavakubernetes  
       NAMESPACE: $SERVICE_NAME  
       IMAGE_NAME: kpjavakubernetes
