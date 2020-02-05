@@ -16,8 +16,8 @@ jobs:
     - uses: azure/docker-login@v1
       with:
         login-server: $REGISTRY_URL
-        username: abc
-        password: xyz
+        username: kapasrijkubacr
+        password: s+Hpaz1jpJFcwmq647n+IpLepCicg4G3
     
     - name: Build and push image to ACR
       id: build-image
@@ -43,8 +43,8 @@ jobs:
       with:
         namespace: $NAMESPACE
         container-registry-url: $REGISTRY_URL
-        container-registry-username: abc
-        container-registry-password: xyz
+        container-registry-username: kapasrijkubacr
+        container-registry-password: s+Hpaz1jpJFcwmq647n+IpLepCicg4G3
         secret-name: $SECRET_NAME
        
     - name: Generate Kubernetes Manifest file
