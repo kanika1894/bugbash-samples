@@ -45,7 +45,7 @@ jobs:
     - uses: azure/k8s-create-secret@v1
       with:
         namespace: $NAMESPACE
-        container-registry-url: $REGISTRY_URL
+        container-registry-url: kapasrijkubacr.azurecr.io
         container-registry-username: kapasrijkubacr
         container-registry-password: s+Hpaz1jpJFcwmq647n+IpLepCicg4G3
         secret-name: $SECRET_NAME
