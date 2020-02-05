@@ -5,7 +5,7 @@ jobs:
       REGISTRY_URL:  kapasrijkubacr.azurecr.io
       SERVICE_NAME: kpjavakubernetes  
       NAMESPACE: $SERVICE_NAME  
-      IMAGE_NAME: $SERVICE_NAME
+      IMAGE_NAME: kpjavakubernetes
       APP_NAME: $(SERVICE_NAME)_
       SECRET_NAME: kpjavakubernetesdockerauth
 
