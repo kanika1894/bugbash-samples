@@ -19,11 +19,11 @@ jobs:
         username: abc
         password: xyz
     
-    - name: Build and push image to ACR
-      id: build-image
-      run: |
-        docker build "$GITHUB_WORKSPACE/java/jsf/container/Application" -f  "java/jsf/container/Application/Dockerfile" -t  $REGISTRY_URL/$IMAGE_NAME:abc
-        docker push $REGISTRY_URL/$IMAGE_NAME:${{  }}
+#     - name: Build and push image to ACR
+#       id: build-image
+#       run: |
+#         docker build "$GITHUB_WORKSPACE/java/jsf/container/Application" -f  "java/jsf/container/Application/Dockerfile" -t  $REGISTRY_URL/$IMAGE_NAME:abc
+#         docker push $REGISTRY_URL/$IMAGE_NAME:${{  }}
     
     - uses: azure/k8s-set-context@v1
       with:
