@@ -22,7 +22,7 @@ jobs:
     - name: Build and push image to ACR
       id: build-image
       run: |
-        docker build "$GITHUB_WORKSPACE/java/jsf/container/Application" -f  "java/jsf/container/Application/Dockerfile" -t  $REGISTRY_URL/$IMAGE_NAME
+        docker build "$GITHUB_WORKSPACE/java/jsf/container/application" -f  "java/jsf/container/application/dockerfile" 
         docker push $REGISTRY_URL/$IMAGE_NAME
     
     - uses: azure/k8s-set-context@v1
