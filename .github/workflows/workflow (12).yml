@@ -50,16 +50,16 @@ jobs:
       id: manifest-creation
       run: |
         echo  "apiVersion: apps/v1beta1
-              kind: Deployment
-              metadata:
+               kind: Deployment
+               metadata:
                 name: "$APP_NAME"
-              spec:
+               spec:
                 replicas: 2
                 template:
                   metadata:
                     labels:
                       app: "$APP_NAME"
-              spec:
+               spec:
                 containers:
                   - name: "$APP_NAME"
                     image: "$REGISTRY_URL/$IMAGE_NAME"
