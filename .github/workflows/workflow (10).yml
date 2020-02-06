@@ -22,8 +22,8 @@ jobs:
     - name: Build and push image to ACR
       id: build-image
       run: |
-        docker build "$GITHUB_WORKSPACE/java/spring/container/Application" -f  "java/spring/container/Application/Dockerfile" -t  $REGISTRY_URL/$IMAGE_NAME:abc
-        docker push $REGISTRY_URL/$IMAGE_NAME:${{  }}
+        docker build "$GITHUB_WORKSPACE/java/spring/container/Application" -f  "java/spring/container/Application/Dockerfile" -t  $REGISTRY_URL/$IMAGE_NAME:qwe
+        docker push $REGISTRY_URL/$IMAGE_NAME:qwe
     
     - uses: azure/k8s-set-context@v1
       with:
