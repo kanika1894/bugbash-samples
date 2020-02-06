@@ -37,6 +37,10 @@ jobs:
     - name: Create namespace
       run: |
         namespacePresent=`kubectl get namespace | grep $NAMESPACE | wc -l`
+        echo $namespacePresent
+        echo $NAMESPACE
+        echo $KUBECONFIG
+        cat $KUBECONFIG
         if [ $namespacePresent -eq 0 ]
         then
             echo `kubectl create namespace $NAMESPACE`
