@@ -2,12 +2,13 @@ on: [push]
 jobs:
   build-and-deploy:
     env:
-      REGISTRY_URL:  kapasrijkubacr .azurecr.io
+      REGISTRY_URL: kapasrijkubacr.azurecr.io
       SERVICE_NAME: kpjavakubernetes  
-      NAMESPACE: $SERVICE_NAME  
-      IMAGE_NAME: $SERVICE_NAME
+      NAMESPACE: kpjavakubernetes  
+      IMAGE_NAME: kpjavakubernetes
       APP_NAME: $(SERVICE_NAME)_
       SECRET_NAME: kpjavakubernetesdockerauth
+      system.debug: 'true'
 
     runs-on: ubuntu-latest
     steps:
@@ -15,19 +16,22 @@ jobs:
     
     - uses: azure/docker-login@v1
       with:
-        login-server: $REGISTRY_URL
-        username: 
-        password: 
+        login-server: kapasrijkubacr.azurecr.io
+        username: 'kapasrijkubacr'
+        password: 's+Hpaz1jpJFcwmq647n+IpLepCicg4G3'
     
     - name: Build and push image to ACR
       id: build-image
       run: |
-        docker build "$GITHUB_WORKSPACE/java/jsf/container/Application" -f  "java/jsf/container/Application/Dockerfile" -t  $REGISTRY_URL/$IMAGE_NAME:${{  }}
-        docker push $REGISTRY_URL/$IMAGE_NAME:${{  }}
+        echo $IMAGE_NAME
+        echo $DOCKER_CONFIG
+        cat $DOCKER_CONFIG/config.json
+        docker build "$GITHUB_WORKSPACE/node/plain/container/Application" -f  "node/plain/container/Application/Dockerfile" -t  $REGISTRY_URL/$IMAGE_NAME
+        docker push $REGISTRY_URL/$IMAGE_NAME
     
     - uses: azure/k8s-set-context@v1
       with:
-         kubeconfig: kpjavakubernetes_07ab7
+         kubeconfig: kpjavakubernetes_b549e
       id: login
     
     - name: Create namespace
@@ -40,11 +44,11 @@ jobs:
 
     - uses: azure/k8s-create-secret@v1
       with:
-        namespace: $NAMESPACE
-        container-registry-url: $REGISTRY_URL
-        container-registry-username: 
-        container-registry-password: 
-        secret-name: $SECRET_NAME
+        namespace: kpjavakubernetes
+        container-registry-url: kapasrijkubacr.azurecr.io
+        container-registry-username: 'kapasrijkubacr'
+        container-registry-password: 's+Hpaz1jpJFcwmq647n+IpLepCicg4G3'
+        secret-name: kpjavakubernetesdockerauth
        
     - name: Generate Kubernetes Manifest file
       id: manifest-creation
@@ -64,7 +68,7 @@ jobs:
                   - name: "$APP_NAME"
                     image: "$REGISTRY_URL/$IMAGE_NAME"
                     ports:
-                    - containerPort: aven:3.5.2-jdk-8
+                    - containerPort: 8080
                   
                   
 
@@ -77,7 +81,7 @@ jobs:
                 spec:
                     type: LoadBalancer
                     ports:
-                    - port: aven:3.5.2-jdk-8
+                    - port: 8080
                       targetPort: http
                       protocol: TCP
                       name: http
@@ -93,6 +97,6 @@ jobs:
         manifests: |
           .yml }}}
         images: |
-          $REGISTRY_URL/$IMAGE_NAME:${{  }}
+          $REGISTRY_URL/$IMAGE_NAME:abc
         imagepullsecrets: |
           $SECRET_NAME
