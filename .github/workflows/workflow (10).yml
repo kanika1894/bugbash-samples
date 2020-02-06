@@ -5,7 +5,7 @@ jobs:
       REGISTRY_URL:  kapasrijkubacr.azurecr.io
       SERVICE_NAME: kpjavakubernetes01  
       NAMESPACE: kpjavakubernetes01 
-      IMAGE_NAME: kpjavakubernetes
+      IMAGE_NAME: kpjavakubernetes01
       APP_NAME: kpjavakubernetes_01
       SECRET_NAME: kpjavakubernetesdockerauth01
 
@@ -22,7 +22,7 @@ jobs:
     - name: Build and push image to ACR
       id: build-image
       run: |
-        docker build "$GITHUB_WORKSPACE/java/spring/container/Application" -f  "/java/spring/container/Application/Dockerfile" -t  $REGISTRY_URL/$IMAGE_NAME:qwe
+        docker build "$GITHUB_WORKSPACE/java/spring/container/Application" -f  "java/spring/container/Application/Dockerfile" -t  $REGISTRY_URL/$IMAGE_NAME:qwe
         docker push $REGISTRY_URL/$IMAGE_NAME:qwe
     
     - uses: azure/k8s-set-context@v1
