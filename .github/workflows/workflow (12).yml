@@ -82,9 +82,7 @@ jobs:
                       protocol: TCP
                       name: http
                     selector:
-                        app: "$APP_NAME"
-                        
-                 "  > manifest_.yml
+                        app: "$APP_NAME"> manifest_.yml
 
 
     - uses: azure/k8s-deploy@v1
