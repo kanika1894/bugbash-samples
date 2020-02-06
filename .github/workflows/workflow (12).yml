@@ -27,7 +27,7 @@ jobs:
     
     - uses: azure/k8s-set-context@v1
       with:
-         kubeconfig: kpjavakubernetes_demotest
+         kubeconfig: ${{secrets.kpjavakubernetes_demotest}}
       id: login
     
     - name: Create namespace
