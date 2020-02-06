@@ -89,7 +89,7 @@ jobs:
       with:
         namespace: kpjavakubernetes
         manifests: |
-          $GITHUB_WORKSPACE/manifest_.yml }}}
+        manifest_.yml }}}
         images: |
           $REGISTRY_URL/$IMAGE_NAME:mnb
         imagepullsecrets: |
