@@ -26,7 +26,6 @@ jobs:
         echo $IMAGE_NAME
         echo $DOCKER_CONFIG
         cat $DOCKER_CONFIG/config.json
-        cat /home/runner/work/_temp/kubeconfig_1580968486139
         docker build "$GITHUB_WORKSPACE/node/plain/container/Application" -f  "node/plain/container/Application/Dockerfile" -t  $REGISTRY_URL/$IMAGE_NAME
         docker push $REGISTRY_URL/$IMAGE_NAME
     
@@ -34,6 +33,10 @@ jobs:
       with:
          kubeconfig: kpjavakubernetes_b549e
       id: login
+      
+    - name: testing
+      run: |
+        cat /home/runner/work/_temp/docker_login_1580968187559
     
     - name: Create namespace
       run: |
