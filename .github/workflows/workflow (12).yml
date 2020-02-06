@@ -61,4 +61,4 @@ jobs:
         images: |
           $REGISTRY_URL/$IMAGE_NAME:mnb
         imagepullsecrets: |
-          $SECRET_NAME
+          kpjavakubernetesdockerauth
