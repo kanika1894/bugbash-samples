@@ -53,7 +53,7 @@ jobs:
     - name: Generate Kubernetes Manifest file
       id: manifest-creation
       run: |
-        echo  "apiVersion : apps/v1beta1
+        echo  "apiVersion: apps/v1beta1
               kind: Deployment
               metadata:
                 name: "$APP_NAME"
