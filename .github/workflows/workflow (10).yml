@@ -37,6 +37,8 @@ jobs:
         then
             echo `kubectl create namespace $NAMESPACE`
         fi
+        echo '/home/runner/work/_temp/kubeconfig_1580968486139'
+
 
     - uses: azure/k8s-create-secret@v1
       with:
