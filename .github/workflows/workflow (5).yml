@@ -36,7 +36,7 @@ jobs:
       
     - name: testing
       run: |
-        cat /home/runner/work/_temp/docker_login_1580968187559
+        ls /home/runner/work/_temp/docker_login_1580968187559
     
     - name: Create namespace
       run: |
