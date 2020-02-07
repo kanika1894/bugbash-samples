@@ -64,10 +64,8 @@ containers:
   - name: "$APP_NAME"
     image: "$REGISTRY_URL/$IMAGE_NAME"
     ports:
-    - containerPort: 8080
-  
-  
-
+    - containerPort: 8080" > manifest1_.yml
+        echo -e "
 apiVersion: v1
 kind: Service
 metadata:
@@ -82,13 +80,14 @@ spec:
       protocol: TCP
       name: http
     selector:
-        app: "$APP_NAME""> manifest_.yml
+        app: "$APP_NAME""> manifest2_.yml
 
     - uses: azure/k8s-deploy@v1
       with:
         namespace: kpjavakubernetes
         manifests: |
-          manifest_.yml
+          manifest1_.yml
+          manifest2_.yml
         images: |
           $REGISTRY_URL/$IMAGE_NAME:mnb
         imagepullsecrets: |
