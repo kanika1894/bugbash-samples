@@ -82,14 +82,13 @@ spec:
     selector:
         app: $APP_NAME" > manifest1_.yml
         
-
-    - uses: azure/k8s-deploy@v1
-      with:
-        namespace: kpjavakubernetes
-        manifests: |
-          manifest1_.yml
-          manifest2_.yml
-        images: |
-          $REGISTRY_URL/$IMAGE_NAME:mnb
-        imagepullsecrets: |
-          kpjavakubernetesdockerauth
+- uses: azure/k8s-deploy@v1
+  with:
+    namespace: kpjavakubernetes
+    manifests: |
+      manifest1_.yml
+      manifest2_.yml
+    images: |
+      $REGISTRY_URL/$IMAGE_NAME:mnb
+    imagepullsecrets: |
+      kpjavakubernetesdockerauth
