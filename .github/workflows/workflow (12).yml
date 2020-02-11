@@ -49,7 +49,7 @@ jobs:
     - name: Generate Kubernetes Manifest file
       id: manifest-creation
       run: |
-        echo -e "apiVersion: apps/v1beta1\nkind: Deployment\nmetadata:\n  name: $APP_NAME\nspec:\n  replicas: 2\n  template:\n    metadata:\n      labels:\n        app: $APP_NAME\nspec:\n  containers:\n    - name: $APP_NAME\n      image: $REGISTRY_URL/$IMAGE_NAME\n      ports:\n      - containerPort: 8080" > manifest1.yml
+        echo -e "apiVersion: apps/v1beta1\nkind: Deployment\nmetadata:\n  name: $APP_NAME\nspec:\n  replicas: 2\n  template:\n    metadata:\n      labels:\n        app: $APP_NAME\n  spec:\n    containers:\n      - name: $APP_NAME\n        image: $REGISTRY_URL/$IMAGE_NAME\n        ports:\n        - containerPort: 8080" > manifest1.yml
         cat manifest1.yml
         
     - uses: azure/k8s-deploy@v1
