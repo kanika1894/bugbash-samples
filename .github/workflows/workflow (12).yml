@@ -22,8 +22,8 @@ jobs:
     - name: Build and push image to ACR
       id: build-image
       run: |
-        docker build "$GITHUB_WORKSPACE/node/plain/container/Application" -f  "node/plain/container/Application/Dockerfile" -t  $REGISTRY_URL/$IMAGE_NAME:mnb
-        docker push $REGISTRY_URL/$IMAGE_NAME:mnb
+        docker build "$GITHUB_WORKSPACE/node/plain/container/Application" -f  "node/plain/container/Application/Dockerfile" -t  $REGISTRY_URL/$IMAGE_NAME:jkl
+        docker push $REGISTRY_URL/$IMAGE_NAME:jkl
     
     - uses: azure/k8s-set-context@v1
       with:
@@ -49,7 +49,7 @@ jobs:
     - name: Generate Kubernetes Manifest file
       id: manifest-creation
       run: |
-        echo -e "apiVersion: apps/v1beta1\nkind: Deployment\nmetadata:\n    name: appname\nspec:\n    replicas: 2\n    template:\n        metadata:\n            labels: {app: appname}\n        spec:\n            containers: [{name: appname, image: url/imagename, ports: [{containerPort: 8080}]}]" > manifest1.yml
+        echo -e "apiVersion: apps/v1beta1\nkind: Deployment\nmetadata:\n    name: $APP_NAME\nspec:\n    replicas: 2\n    template:\n        metadata:\n            labels: {app: $APP_NAME}\n        spec:\n            containers: [{name: $APP_NAME, image: url/imagename, ports: [{containerPort: 8080}]}]" > manifest1.yml
         cat manifest1.yml
         
     - uses: azure/k8s-deploy@v1
