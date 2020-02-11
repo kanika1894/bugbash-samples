@@ -6,7 +6,7 @@ jobs:
       SERVICE_NAME: kpjavakubernetes  
       NAMESPACE: kpjavakubernetes  
       IMAGE_NAME: kpjavakubernetes
-      APP_NAME: kpjavakubernetes_
+      APP_NAME: kpjavakubernetes
       SECRET_NAME: kpjavakubernetesdockerauth
 
     runs-on: ubuntu-latest
