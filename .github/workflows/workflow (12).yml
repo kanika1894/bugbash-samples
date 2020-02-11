@@ -64,13 +64,14 @@ jobs:
                   - name: $APP_NAME
                     image: $REGISTRY_URL/$IMAGE_NAME
                     ports:
-                    - containerPort: 8080" > manifest1_.yml
+                    - containerPort: 8080" > manifest1.yml
+          cat manifest1.yml
         
     - uses: azure/k8s-deploy@v1
       with:
         namespace: kpjavakubernetes
         manifests: |
-          manifest1_.yml
+          manifest1.yml
         images: |
           $REGISTRY_URL/$IMAGE_NAME:mnb
         imagepullsecrets: |
