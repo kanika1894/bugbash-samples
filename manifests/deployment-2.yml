@@ -1,0 +1,16 @@
+apiVersion : apps/v1beta1
+kind: Deployment
+metadata:
+  name: "divman-0212"
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: "divman-0212"
+    spec:
+      containers:
+        - name: "divman-0212"
+          image: "kapasrijkubacr.azurecr.io/divman"
+          ports:
+          - containerPort: 80
