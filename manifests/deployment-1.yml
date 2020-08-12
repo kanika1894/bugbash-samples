@@ -1,0 +1,16 @@
+apiVersion : apps/v1beta1
+kind: Deployment
+metadata:
+  name: "kptestproj-d29b"
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: "kptestproj-d29b"
+    spec:
+      containers:
+        - name: "kptestproj-d29b"
+          image: "kapasrijkubacr.azurecr.io/kptestproj"
+          ports:
+          - containerPort: 8080
