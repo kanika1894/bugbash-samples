@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: "divman-d973"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: "divman-d973"
+  template:
+    metadata:
+      labels:
+        app: "divman-d973"
+    spec:
+      containers:
+        - name: "divman-d973"
+          image: "kapasrijkubacr.azurecr.io/divman"
+          ports:
+          - containerPort: 80
