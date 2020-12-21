@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: "kptestcluster-dd02"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: "kptestcluster-dd02"
+  template:
+    metadata:
+      labels:
+        app: "kptestcluster-dd02"
+    spec:
+      containers:
+        - name: "kptestcluster-dd02"
+          image: "aaaatiwarishubregistry.azurecr.io/kptestcluster"
+          ports:
+          - containerPort: 80
